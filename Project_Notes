@@ -1,17 +1,16 @@
 NOTES
 
 
-In your FastAPI application, the order of these two endpoint definitions matters because of the way path parameters are handled. Let's break down what's happening:
+In your FastAPI application, the order of these two endpoint definitions matters because of the way path parameters are handled:
 
-@app.get("/blog/all"): This endpoint matches the exact path /blog/all.
+-> @app.get("/blog/all"): This endpoint matches the exact path /blog/all.
 
-@app.get("/blog/{id}"): This endpoint matches any path that starts with /blog/ followed by any value, and that value is captured in the id parameter.
+-> @app.get("/blog/{id}"): This endpoint matches any path that starts with /blog/ followed by any value, and that value is 
+captured in the id parameter.
 
-If you were to reverse the order of these two endpoints, the /blog/{id} endpoint would capture the /blog/all request because the {id} path parameter acts as a wildcard. So when a request is made to /blog/all, it would be matched to the /blog/{id} endpoint, with all being interpreted as the id parameter.
 
-By defining the /blog/all endpoint first, you ensure that any requests to that exact path are routed to the get_all_blogs function. Any requests to /blog/ followed by an integer will then be routed to the get_blog function.
-
-This order-sensitive pattern matching is a common feature in web frameworks that use path parameters, and it's essential to understand when defining your routes to ensure that requests are routed to the correct endpoint.
+This order-sensitive pattern matching is a common feature in web frameworks that use path parameters, 
+and it's essential to understand when defining your routes to ensure that requests are routed to the correct endpoint.
 
 
 
