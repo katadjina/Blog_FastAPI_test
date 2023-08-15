@@ -11,8 +11,8 @@ def get_all_blogs():
 
 
 @app.get("/blog/type/{type}")
-def get_blog_type(type: BlogType):
-    return {'message' : f'Blog type: {type}'}
+def blog_type(type: BlogType):
+    return {'message' : f'Blog type: {type.value}'}
 
 
 @app.get("/blog/{id}")
