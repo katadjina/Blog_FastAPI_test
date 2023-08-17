@@ -1,64 +1,22 @@
 from fastapi import FastAPI
-from fastapi import status
-from fastapi import Response
-from models import BlogType
-from typing import Optional
+#import the router file
+from router import blog_get
+from router import blog_post
+
+
+#FastAPI documentation ->  http://127.0.0.1:8000/docs
+
 
 
 
 app = FastAPI()
-#tags param in the decorator 4 grouping endpoints in the generated API documentation.
-@app.get(
-    '/blog/all',
-    tags=['blog'],
-    summary = 'Retrieve all blogs',
-    description = 'Lorem Ipsum')
-#setting an optional value for a parameter
-def get_all_blogs(page, page_size: Optional[int] = None):
-    return {'message' : f'All {page_size} blogs on page {page}'}
-
-
-@app.get('/blog/type/{type}' ,tags=['blog'])
-def blog_type(type: BlogType):
-    return {'message' : f'Blog type: {type.value}'}
+app.include_router(blog_get.router)
+app.include_router(blog_post.router)
 
 
 
-@app.get('/blog/{id}/comments/{comment_id}', tags=['blog', 'comment'])
-def get_comment(id: int, comment_id: int, valid:bool= True, username: Optional[str] = None):
-    #adding a desc for the documentation:
-    
-    """
-    Simulates comment retrieval from a blog post. 
-    - **id** mandatory
-    - **comment_id** mandatory path param
-    - **valid** optional query param
-    - **username** optional query param
-     
-    """
-    return {'message' : f'blog_id {id}, comment_id {comment_id}, valid {valid}, username {username}'}
+#testin
 
-
-
-"""  Example of simple error handling
-@app.get('/blog/{id}', status_code=404)
-def get_blog(id: int):
-    if id > 10:
-        #if true -> code=404
-        return {'error' : f'Blog with id {id} not found'}
-    else:
-      return {'message' : f'Post with id {id}'}
-"""
-
-
-
-
-@app.get('/blog/{id}' , tags=['blog', 'comment'] ,status_code=status.HTTP_200_OK)
-def get_blog(id: int, response: Response):
-    if id > 10:
-        #if true -> code=404
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return {'error' : f'Post with id {id} not found'}
-    else:
-        response.status_code = status.HTTP_200_OK
-        return {'message' : f'Post with id {id}'}
+@app.get('/test')
+def index():
+    return {'message': 'testing'}
