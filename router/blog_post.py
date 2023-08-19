@@ -37,7 +37,12 @@ def create_comment(blog: BlogModel, id: int,
                     alias= 'commentId',
                     deprecated=True
                 ),
-            content: str = Body('hello')
+                # ellipsis (...) -> Require a value (non-optional parameters)
+                # setting a default value: content: str = Body('lorem ipsum')
+            content: str = Body(...,
+                                min_length=3,
+                                max_length=50,
+                                regex='^[a-z\s]*$')
             ):
             return {
                 'blog': blog,
