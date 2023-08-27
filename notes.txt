@@ -1,0 +1,6 @@
+Database definition -> database.py
+Model definition -> models.py
+Create database -> main.py
+Schema definition -> schemas.py
+ORM functionality -> db_user.py
+API functionality -> user.py
