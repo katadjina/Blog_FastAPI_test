@@ -63,19 +63,8 @@ def create_comment(
 ################################################################
 # The function definition includes additional metadata for the function parameters using the Query
 # Here's what each parameter in the Query constructor means:
-'''
-None: This is the default value for the comment_id parameter. If no value is provided for comment_id, it will default to None.
 
-title: This is a human-readable title for the parameter. It's used for generating documentation and providing a clear description 
-of what the parameter represents.
 
-description: This is a longer description that provides more context about the purpose and usage of the parameter.
-It's also used for generating documentation to help developers understand how to use the parameter correctly.
 
-alias: This parameter allows you to specify an alternative name (alias) for the parameter. 
-In this case, the parameter is named comment_id, but it can also be accessed using the alias commentId.
-
-deprecated: This parameter is set to True, indicating that the comment_id parameter is deprecated.
-Deprecation means that the parameter is no longer recommended for use, and developers are encouraged to use an alternative approach or parameter. 
-It's a way to signal that the parameter might be removed in the future.
-'''
+def required_functionality():
+    return{'message' : 'just text'}

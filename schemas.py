@@ -5,3 +5,9 @@ class UserBase(BaseModel):
     email: str
     password: str
     
+    
+class UserDisplay(BaseModel):
+    username:str
+    email:str
+    class Config():
+        orm_mode = True

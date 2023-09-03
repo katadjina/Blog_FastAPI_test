@@ -12,10 +12,11 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 
-
+## get_db function -> Context manager provides a session from the session factory
+## ensures that the session is closed after its usage. It's especially useful in the context of FastAPI.
 def get_db():
-    db = SessionLocal()
+    db = SessionLocal()  ## creates a new session instance. 
     try:
-        yield db
+        yield db #yields the session back to the caller (typically a FastAPI route). 
     finally:
         db.close()    

@@ -9,3 +9,4 @@ class DbUser(Base):
     email = Column(String)
     password = Column(String)
     
+    
