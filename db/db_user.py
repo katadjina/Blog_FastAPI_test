@@ -3,6 +3,9 @@ from schemas import UserBase
 from db.models import DbUser
 from db.hash import Hash
 
+
+## CRUD operations for interacting with DB by using SQLAlchemy
+
 def create_user(db: Session, request: UserBase ):
     new_user = DbUser(
         username = request.username,
@@ -23,3 +26,24 @@ def get_all_users(db: Session):
 
 def get_user(db: Session, id: int):
     return db.query(DbUser).filter(DbUser.id == id).first()
+
+
+def update_user(db: Session, id: int, request: UserBase):
+    user = db.query(DbUser).filter(DbUser.id == id) 
+    user.update({
+        DbUser.username: request.username,
+        DbUser.email: request.email,
+        DbUser.password: Hash.bcrypt(request.password)
+    })
+    db.commit()
+    
+
+
+def delete_user(db: Session, id: int):
+    user = db.query(DbUser).filter(DbUser.id == id).first()
+    if not user:
+        return None
+    db.delete(user)
+    db.commit()
+    return 'user deleted'
+    

@@ -4,16 +4,17 @@ from sqlalchemy.orm import Session
 from db.database import get_db
 from db import db_user
 from typing import List
+from fastapi import HTTPException
 
 
 router = APIRouter(
     prefix='/user',
     tags=['user']
 )
-
+#Implementing @router routes
 
 #Create user
-@router.post('/', response_model= UserDisplay) #dont show password
+@router.post('/', response_model= UserDisplay) #dont show password #??
 def create_user(request: UserBase, db: Session = Depends(get_db)):
     return db_user.create_user(db, request)
 
@@ -32,6 +33,22 @@ def get_user(id: int, db:Session = Depends(get_db)):
 
 
 #update
-
+@router.post('/{id}/update')
+def update_user(id: int, request: UserBase, db: Session = Depends(get_db)):
+    return db_user.update_user(db, id, request)
 
 #delete
+
+'''
+@router.get('/delete/{id}')
+def delete_user(id: int, db: Session = Depends(get_db)):
+    return  db_user.delete_user(db, id)
+'''    
+
+#with condition: 
+@router.get('/delete/{id}')
+def delete_user(id: int, db: Session = Depends(get_db)):
+    user = db_user.delete_user(db, id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return {"detail": "User successfully deleted"}

@@ -30,6 +30,13 @@ def create_blog(blog: BlogModel, id: int, version: int = 1):
         }
 
 
+'''
+Demo for extracting data from different parts of a request
+(various components of HTTP requests)
+(path parameters, query parameters, and the request body) 
+using FastAPI's various tools, without DB interaction
+'''
+
 
 @router.post('/new/{id}/comment/{comment_id}')
 def create_comment(

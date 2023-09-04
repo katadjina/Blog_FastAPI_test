@@ -1,0 +1,84 @@
+Database definition -> database.py
+Model definition -> models.py
+Create database -> main.py
+Schema definition -> schemas.py
+ORM functionality -> db_user.py
+API functionality -> user.py
+
+
+
+
+----------------------------------------------------------------
+Declarative System: SQLAlchemy's ORM provides a "declarative" system, 
+which allows classes to be created with a base class provided by the ORM. These classes then become "declarative" models,
+ which can be used to represent tables in a database.
+ ----------------------------------------------------------------
+ declarative_base() Function: This function creates a new base class from which all mapped classes should inherit. 
+ When a class inherits from this base class, it becomes associated with a table in a database.
+This allows for the querying and persistence of instances of the class using SQLAlchemy's session mechanism.
+--------------------------------------------------------------------------------------------------------------------------------
+TablePlus is a modern, native tool with elegant UI that allows you to simultaneously manage multiple databases such as 
+MySQL, PostgreSQL, SQLite, Microsoft SQL Server and more.
+________________________________________________________________
+router
+ A router in FastAPI is a way to group together specific sets of routes. This makes your code more modular and organized.
+--------------------------------------------------------------------------------------------------------------------------------
+SQLAlchemy --> an Object Relational Mapper (ORM) for Python.
+
+----------------------------------------------------------------
+Swagger UI's main purpose is to provide interactive documentation for RESTful APIs. 
+With Swagger UI, you can see all available endpoints, their required parameters, request/response models, and more.
+allows you to make API calls directly from the documentation. You can fill in parameters, make requests, and see responses. 
+This is helpful for quick testing and demonstrations.
+
+
+-> Both Swagger UI and Postman allow users to make requests to APIs and view responses.
+
+----------------------------------------------------------------
+RELATIONSHIPS - Defined in models
+----------------------------------------------------------------
+HTTP Requests Components:
+
+-> URL(Path) Parameters:
+
+These are embedded directly in the URL path.
+For instance, in /new/{id}/comment/{comment_id}, id and comment_id are path parameters.
+In FastAPI, you can use the Path function to extract and validate these parameters.
+
+"/new" : This is a static path segment. It doesn't change and is part of the defined route.
+"/{id}": This is a dynamic path segment or a path parameter. T
+
+
+
+Query Parameters:
+
+These follow the main URL and are prefixed by a ? character. They are usually in the form of key-value pairs separated by &.
+Example: /items?page=2&limit=10 where page and limit are query parameters.
+In FastAPI, you can use the Query function to extract and validate these parameters.
+Headers:
+
+These are sent as part of the HTTP request header and can contain metadata about the request like authentication tokens, accepted content types, etc.
+In FastAPI, headers can be extracted using the Header function.
+Request Body:
+
+This is the main content of the request. For a POST request, this would typically contain the data you're trying to send to the server.
+It can be in various formats, but JSON is one of the most common formats.
+In FastAPI, you can use Pydantic models to extract, validate, and parse the request body.
+Cookies:
+
+Small pieces of data stored in the client and sent with requests to the server. They can be used for sessions, tracking, etc.
+In FastAPI, cookies can be extracted using the Cookie function.
+----------------------------------------------------------------
+NOTES
+
+
+In your FastAPI application, the order of these two endpoint definitions matters because of the way path parameters are handled:
+
+-> @app.get("/blog/all"): This endpoint matches the exact path /blog/all.
+
+-> @app.get("/blog/{id}"): This endpoint matches any path that starts with /blog/ followed by any value, and that value is 
+captured in the id parameter.
+
+
+This order-sensitive pattern matching is a common feature in web frameworks that use path parameters, 
+and it's essential to understand when defining your routes to ensure that requests are routed to the correct endpoint.
