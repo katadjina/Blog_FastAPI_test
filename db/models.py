@@ -1,9 +1,9 @@
-from sqlalchemy.sql.sqltypes import Integer, String, Boolean
+from sqlalchemy.sql.sqltypes import Integer, String, Boolean, DateTime
 from db.database import Base
 from sqlalchemy import Column
 from sqlalchemy.sql.schema import ForeignKey
 from sqlalchemy.orm import relationship
-from sqlalchemy.sql.sqltypes import Date
+from datetime import datetime
 
 
 #USER - Article -> 2way relationship
@@ -23,6 +23,6 @@ class DbArticle(Base):
     title = Column(String)
     content = Column(String)
     published = Column(Boolean)
-    date_published = Column(Date)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship('DbUser', back_populates='items')
+    # date_created: Column(DateTime)
+    user_id = Column(Integer, ForeignKey('users.id'))  #ponting to the 'users' table / 'id' column
+    user = relationship("DbUser", back_populates='items')

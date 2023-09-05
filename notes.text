@@ -36,6 +36,7 @@ This is helpful for quick testing and demonstrations.
 
 ----------------------------------------------------------------
 RELATIONSHIPS - Defined in models
+Allow to retrieve elements from multiple tables in a single request
 ----------------------------------------------------------------
 HTTP Requests Components:
 
