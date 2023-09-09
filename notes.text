@@ -83,3 +83,13 @@ captured in the id parameter.
 
 This order-sensitive pattern matching is a common feature in web frameworks that use path parameters, 
 and it's essential to understand when defining your routes to ensure that requests are routed to the correct endpoint.
+
+
+________________________________________________________________
+RESPONSES we can provide from our API 
+Standdard response: model, list, db model, dict...
+We can customize the Response object but with no data conversion to
+
+________________________________________________________________
+HEADERS - Pieces of info sent with a request and received with a response
+- are defined in function definition

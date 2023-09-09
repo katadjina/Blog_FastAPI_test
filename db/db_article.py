@@ -3,13 +3,15 @@ from schemas import ArticleBase
 from db.models import DbArticle
 from fastapi import HTTPException, status
 from datetime import datetime
-
+from exception import TestException
 
 
 
 
 
 def create_article(db: Session, request: ArticleBase):
+    if request.content.startswith('Testing Article'):
+        raise TestException('Exception testing')
     new_article =  DbArticle (
         title = request.title,
         content = request.content,
