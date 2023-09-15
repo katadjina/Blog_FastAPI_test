@@ -1,6 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Header
 from fastapi.responses import Response, HTMLResponse
 from starlette.responses import PlainTextResponse
+from typing import Optional, List
 
 
 
@@ -18,9 +19,19 @@ def get_all_products():
     # return products
     # or custom response, all elements in one string
     data = " ".join(products)
-    return Response(content=data, media_type="text/plain")
+    #return Response(content=data, media_type="text/plain")
+    response = Response(content=data, media_type="text/plain")
+    response.set_cookie(key="test_cookie", value="test_cookie_value")
+    return response
 
-
+@router.get('/withheader')
+def get_products(
+    response: Response,
+    custom_header: Optional[List[str]]= Header(None)
+    ):
+    response.headers['custom_response_header'] = ", ".join(custom_header)
+    
+    return products
 
 
 @router.get('/{id}' , responses={
