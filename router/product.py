@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Header
+from fastapi import APIRouter, Cookie, Header, Form
 from fastapi.responses import Response, HTMLResponse
 from starlette.responses import PlainTextResponse
 from typing import Optional, List
@@ -14,6 +14,14 @@ router = APIRouter(
 
 products = ['watch' , 'camera', 'phone']
 
+
+@router.post('/new')
+def create_product(name:str = Form(...)):
+    products.append(name)
+    return products
+
+
+
 @router.get('/all')
 def get_all_products():
     # return products
@@ -27,11 +35,17 @@ def get_all_products():
 @router.get('/withheader')
 def get_products(
     response: Response,
-    custom_header: Optional[List[str]]= Header(None)
+    custom_header: Optional[List[str]]= Header(None),
+    test_cookie: Optional[str] = Cookie(None)
     ):
-    response.headers['custom_response_header'] = ", ".join(custom_header)
+    if custom_header:
+        response.headers['custom_response_header'] = ", ".join(custom_header)
+        return {
+            'data': products,
+            'custom_header': custom_header,
+            'my_cookie': test_cookie
+            }
     
-    return products
 
 
 @router.get('/{id}' , responses={
