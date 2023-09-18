@@ -5,6 +5,7 @@ from db.database import get_db
 from db import db_user
 from typing import List
 from fastapi import HTTPException
+from auth.oauth2 import get_current_user
 
 
 router = APIRouter(
