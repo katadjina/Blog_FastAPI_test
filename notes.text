@@ -102,3 +102,10 @@ ________________________________________________________________
 authentication
 OAuth2PasswordBearer is a class that provides a way to get the token from the request. 
 However, it does not provide OAuth2 functionality like token creation, verification, etc.
+
+
+________________________________________________________________
+UPLOADING FILES
+
+Declared similarly to form fields
+eg. def get_file(file: bytes=File(...)):
