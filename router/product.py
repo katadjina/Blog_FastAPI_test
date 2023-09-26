@@ -2,7 +2,7 @@ from fastapi import APIRouter, Cookie, Header, Form
 from fastapi.responses import Response, HTMLResponse
 from starlette.responses import PlainTextResponse
 from typing import Optional, List
-
+import time
 
 
 router = APIRouter(
@@ -15,6 +15,12 @@ router = APIRouter(
 products = ['watch' , 'camera', 'phone']
 
 
+
+async def time_consuming_functionality():
+    time.sleep(5)
+    return 'ok'
+    
+
 @router.post('/new')
 def create_product(name:str = Form(...)):
     products.append(name)
@@ -23,7 +29,8 @@ def create_product(name:str = Form(...)):
 
 
 @router.get('/all')
-def get_all_products():
+async def get_all_products():
+    await time_consuming_functionality() #adding this function will result in receiving outcome delayed by 5sec
     # return products
     # or custom response, all elements in one string
     data = " ".join(products)

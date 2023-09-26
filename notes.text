@@ -109,3 +109,18 @@ UPLOADING FILES
 
 Declared similarly to form fields
 eg. def get_file(file: bytes=File(...)):
+
+
+________________________________________________________________
+CONCURENCY
+So basically every functionality that 
+can be paused needs to be marked with async and the await keyword
+
+
+async def time_consuming_functionality():
+    time.sleep(5)
+    return 'ok'
+
+@router.get('/all')
+async def get_all_products():
+    await time_consuming_functionality() 
